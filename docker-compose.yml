@@ -1,4 +1,4 @@
-version: "3"
+version: "3.7"
 services:
 
     # NGINX Service
@@ -36,13 +36,32 @@ services:
         networks:
             - company-network
 
+    # Adminer Service
+    adminer:
+        build:
+            context:  "./adminer/"
+            dockerfile:  "Dockerfile"
+        container_name: adminer
+        depends_on:
+            - dbmysql
+        environment:
+            ADMINER_DEFAULT_SERVER: dbmysql
+            ADMINER_DEFAULT_DB_DRIVER: mysql
+            ADMINER_DEFAULT_DB_HOST: mariadb
+            ADMINER_DEFAULT_DB_NAME: adminer
+            ADMINER_DESIGN: nette
+            ADMINER_PLUGINS: tables-filter tinymce
+        ports:
+            - 8080:8080
+    
     # MYSQL Service
-    db-mysql:
+    dbmysql:
         build:
             context:  "./mysql/"
             dockerfile:  "Dockerfile"
-        container_name: db-mysql
-        tty: true
+        container_name: dbmysql
+        tty: false
+        command: --default-authentication-plugin=mysql_native_password
         environment:
             MYSQL_DATABASE: ${DB_DATABASE}
             MYSQL_USER: ${DB_USER}
@@ -54,7 +73,9 @@ services:
         networks:
             - company-network
         ports:
-            - ${DB_PORT}:3066
+            - ${DB_PORT}:3306
+
+    
 
 # Docker Networks
 networks:
