@@ -1,0 +1,41 @@
+# phpstorm project files
+.idea
+
+# netbeans project files
+nbproject
+
+# zend studio for eclipse project files
+.buildpath
+.project
+.settings
+
+# windows thumbnail cache
+Thumbs.db
+
+# Mac DS_Store Files
+.DS_Store
+
+# phpunit itself is not needed
+phpunit.phar
+
+# local phpunit config
+/phpunit.xml
+
+# composer vendor dir
+/php/yii2/vendor
+
+# composer itself is not needed
+/php/yii2/composer.phar
+
+# yii2 runtime debug folder
+/php/yii2/runtime/debug
+
+# yii2 tests folder
+/php/yii2/tests/_output/*
+/php/yii2/tests/_support/_generated
+
+# yii2 vagrant folder
+/php/yii2/vagrant
+
+# yii2 web folder
+/php/yii2/web/assets

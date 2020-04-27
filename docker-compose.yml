@@ -1,0 +1,62 @@
+version: "3"
+services:
+
+    # NGINX Service
+    company-webserver-nginx:
+        build:
+            context:  "./nginx"
+            dockerfile: "Dockerfile"
+        container_name: company-webserver-nginx
+        ports:
+            - "${WEB_SERVER_PORT}:80"
+        volumes:
+            - "./php/yii2/:/var/www/html"
+            - ./nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf:ro
+            - ./nginx/ssl/:/etc/nginx/ssl/
+        depends_on:
+            - company-php-yii2
+        networks:
+            - company-network
+
+    # PHP App
+    company-php-yii2:
+        build:
+            context:  "./php"
+            dockerfile: "Dockerfile"
+        container_name: company-php-yii2
+        tty: true
+        working_dir: /var/www/html
+        volumes:
+            - "./php/yii2/:/var/www/html"
+        networks:
+            - company-network
+
+    # MYSQL Service
+    company-db-mysql:
+        build:
+            context:  "./mysql/"
+            dockerfile:  "Dockerfile"
+        container_name: company-db-mysql
+        tty: true
+        environment:
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_USER: ${DB_USER}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+            MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+        volumes:
+            - company-volumes:/var/lib/mysql/
+            - ./mysql/my.cnf:/etc/mysql/my.cnf
+        networks:
+            - company-network
+        ports:
+            - ${DB_PORT}:3066
+
+# Docker Networks
+networks:
+    company-network:
+        driver: bridge
+
+# Docker Volumes
+volumes:
+    company-volumes:
+        driver: local
