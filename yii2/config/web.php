@@ -12,7 +12,22 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+    
+    'language' => 'en',
+    'modules' => [
+        'admin' => [
+            'class' => 'mdm\admin\Module',
+            'layout' => 'left-menu', // it can be '@path/to/your/layout'.
+        ],
+        'mimin' => [
+            'class' => '\hscstudio\mimin\Module',
+        ],
+    ],
     'components' => [
+        'db' => $db,
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager', // only support DbManager
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'VnRxKwxSJaaMdpXDHLg4cALqhit6ojof',
@@ -22,7 +37,7 @@ $config = [
         ],
         'user' => [
             'identityClass' => 'app\models\User',
-            'enableAutoLogin' => true,
+            'enableAutoLogin' => false,
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -43,8 +58,6 @@ $config = [
                 ],
             ],
         ],
-        'db' => $db,
-
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
@@ -55,31 +68,19 @@ $config = [
                 'login' => 'site/login',
             ],
         ],
-        'authManager' => [
-            'class' => 'yii\rbac\DbManager  ', // or use 'yii\rbac\DbManager'
-        ]
-
     ],
-    'params' => $params,
-    'language' => 'en',
-    'modules' => [
-        'admin' => [
-            'class' =>  'mdm\admin\Module',
-        ]
-    ],
-
+   
     'as access' => [
+        // 'class' => '\hscstudio\mimin\components\AccessControl',
         'class' => 'mdm\admin\components\AccessControl',
         'allowActions' => [
+            // add wildcard allowed action here!
             'site/*',
             'admin/*',
-            // The actions listed here will be allowed to everyone including guests.
-            // So, 'admin/*' should not appear here in the production, of course.
-            // But in the earlier stages of your development, you may probably want to
-            // add a lot of actions here until you finally completed setting up rbac,
-            // otherwise you may not even take a first step.
-        ]
+            'mimin/*', // only in dev mode
+        ],
     ],
+    'params' => $params,
 ];
 
 if (YII_ENV_DEV) {

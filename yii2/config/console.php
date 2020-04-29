@@ -13,9 +13,19 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
         '@tests' => '@app/tests',
     ],
+    'modules' => [
+        'admin' => [
+            'class' => 'mdm\admin\Module',
+            'layout' => 'left-menu', // it can be '@path/to/your/layout'.
+        ],
+        'mimin' => [
+            'class' => '\hscstudio\mimin\Module',
+        ],
+    ],
     'components' => [
+        'db' => $db,
         'authManager' => [
-            'class' => 'yii\rbac\DbManager  ', // or use 'yii\rbac\DbManager'
+            'class' => 'yii\rbac\DbManager', // only support DbManager
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -28,8 +38,8 @@ $config = [
                 ],
             ],
         ],
-        'db' => $db,
     ],
+    
     'params' => $params,
     /*
     'controllerMap' => [
