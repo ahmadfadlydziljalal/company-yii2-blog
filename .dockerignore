@@ -1,0 +1,11 @@
+.git/*
+
+# yii2 tests folder
+/yii2/tests/_output/*
+/yii2/tests/_support/_generated
+
+# yii2 vagrant folder
+/yii2/vagrant
+
+# yii2 web folder
+/yii2/web/assets

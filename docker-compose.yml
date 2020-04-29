@@ -1,4 +1,6 @@
-version: "3.7"
+version: "3"
+
+# Services
 services:
 
     # NGINX Service
@@ -10,29 +12,11 @@ services:
         ports:
             - "${WEB_SERVER_PORT}:80"
         volumes:
-            - "./php/yii2/:/var/www/html"
+            - "./yii2/:/var/www/html"
             - ./nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf:ro
             - ./nginx/ssl/:/etc/nginx/ssl/
         depends_on:
             - php-yii2
-        networks:
-            - company-network
-
-    # PHP App
-    php-yii2:
-        build:
-            context:  "./php"
-            dockerfile: "Dockerfile"
-        container_name: php-yii2
-        tty: true
-        working_dir: /var/www/html
-        environment: 
-            - DB_HOST=${DB_HOST}
-            - DB_NAME=${DB_DATABASE}
-            - DB_ROOT_USER=${DB_ROOT_USER}
-            - DB_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
-        volumes:
-            - "./php/yii2/:/var/www/html"
         networks:
             - company-network
 
@@ -43,27 +27,27 @@ services:
             dockerfile:  "Dockerfile"
         container_name: adminer
         depends_on:
-            - dbmysql
+            - db
         environment:
-            ADMINER_DEFAULT_SERVER: dbmysql
+            ADMINER_DEFAULT_SERVER: db
             ADMINER_DEFAULT_DB_DRIVER: mysql
-            ADMINER_DEFAULT_DB_HOST: mariadb
+            ADMINER_DEFAULT_DB_HOST: mysql
             ADMINER_DEFAULT_DB_NAME: adminer
             ADMINER_DESIGN: nette
             ADMINER_PLUGINS: tables-filter tinymce
         ports:
             - 8080:8080
-    
+
     # MYSQL Service
-    dbmysql:
+    db:
         build:
             context:  "./mysql/"
             dockerfile:  "Dockerfile"
-        container_name: dbmysql
+        container_name: db
         tty: false
         command: --default-authentication-plugin=mysql_native_password
         environment:
-            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_DATABASE: ${DB_NAME}
             MYSQL_USER: ${DB_USER}
             MYSQL_PASSWORD: ${DB_PASSWORD}
             MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
@@ -75,7 +59,22 @@ services:
         ports:
             - ${DB_PORT}:3306
 
-    
+    # PHP App Service
+    php-yii2:
+        build:
+            context:  "."
+            dockerfile: "./php/Dockerfile"
+        container_name: php-yii2
+        tty: true
+        working_dir: /var/www/html
+        env_file: 
+            - .env
+        volumes:
+            - "./yii2/:/var/www/html"
+        networks:
+            - company-network
+        depends_on:
+            - db
 
 # Docker Networks
 networks:

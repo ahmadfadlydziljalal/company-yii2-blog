@@ -22,20 +22,20 @@ phpunit.phar
 /phpunit.xml
 
 # composer vendor dir
-/php/yii2/vendor
+/yii2/vendor
 
 # composer itself is not needed
-/php/yii2/composer.phar
+/yii2/composer.phar
 
 # yii2 runtime debug folder
-/php/yii2/runtime/debug
+/yii2/runtime/debug
 
 # yii2 tests folder
-/php/yii2/tests/_output/*
-/php/yii2/tests/_support/_generated
+/yii2/tests/_output/*
+/yii2/tests/_support/_generated
 
 # yii2 vagrant folder
-/php/yii2/vagrant
+/yii2/vagrant
 
 # yii2 web folder
-/php/yii2/web/assets
+/yii2/web/assets
