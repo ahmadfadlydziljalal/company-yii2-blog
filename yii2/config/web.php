@@ -17,7 +17,8 @@ $config = [
     'modules' => [
         'admin' => [
             'class' => 'mdm\admin\Module',
-            'layout' => 'left-menu', // it can be '@path/to/your/layout'.
+            //'layout' => 'left-menu', // it can be '@path/to/your/layout'.
+//            'layout' => 'left-menu', // it can be '@path/to/your/layout'.
         ],
         'mimin' => [
             'class' => '\hscstudio\mimin\Module',
@@ -35,9 +36,13 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
-        'user' => [
+        /*'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => false,
+        ],*/
+        'user' => [
+            'identityClass' => 'mdm\admin\models\User',
+            'loginUrl' => ['admin/user/login'],
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -65,7 +70,7 @@ $config = [
                 '/' => 'site/index',
                 'about' => 'site/about',
                 'contact' => 'site/contact',
-                'login' => 'site/login',
+                'login' => 'admin/user/login',
             ],
         ],
     ],
@@ -76,8 +81,8 @@ $config = [
         'allowActions' => [
             // add wildcard allowed action here!
             'site/*',
-            'admin/*',
-            'mimin/*', // only in dev mode
+            // 'admin/*',
+            // 'mimin/*', // only in dev mode
         ],
     ],
     'params' => $params,
