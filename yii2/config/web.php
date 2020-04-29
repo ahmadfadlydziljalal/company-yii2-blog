@@ -18,7 +18,6 @@ $config = [
         'admin' => [
             'class' => 'mdm\admin\Module',
             //'layout' => 'left-menu', // it can be '@path/to/your/layout'.
-//            'layout' => 'left-menu', // it can be '@path/to/your/layout'.
         ],
         'mimin' => [
             'class' => '\hscstudio\mimin\Module',
@@ -36,14 +35,14 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
-        /*'user' => [
+        'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => false,
-        ],*/
-        'user' => [
+        ],
+        /*'user' => [
             'identityClass' => 'mdm\admin\models\User',
             'loginUrl' => ['admin/user/login'],
-        ],
+        ],*/
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
@@ -80,9 +79,9 @@ $config = [
         'class' => 'mdm\admin\components\AccessControl',
         'allowActions' => [
             // add wildcard allowed action here!
-            'site/*',
             // 'admin/*',
             // 'mimin/*', // only in dev mode
+            'site/*',
         ],
     ],
     'params' => $params,
@@ -94,7 +93,7 @@ if (YII_ENV_DEV) {
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+        // 'allowedIPs' => ['127.0.0.1', '::1'],
     ];
 
     $config['bootstrap'][] = 'gii';
@@ -102,6 +101,7 @@ if (YII_ENV_DEV) {
         'class' => 'yii\gii\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
         //'allowedIPs' => ['127.0.0.1', '::1'],
+         'allowedIPs' => ['*'],
     ];
 }
 
