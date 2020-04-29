@@ -69,7 +69,7 @@ $config = [
                 '/' => 'site/index',
                 'about' => 'site/about',
                 'contact' => 'site/contact',
-                'login' => 'admin/user/login',
+                'login' => 'site/login',
             ],
         ],
     ],

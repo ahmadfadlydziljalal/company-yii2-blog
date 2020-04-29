@@ -1,0 +1,5 @@
+{
+    "require": {
+        "yiisoft/yii2-bootstrap4": "^2.0"
+    }
+}
