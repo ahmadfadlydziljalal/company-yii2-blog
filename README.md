@@ -3,7 +3,7 @@
 Web Application yang bersifat microservice. 
 Bertujuan membuat blog berbasis Docker Containerization.
 
-<strong>Dependency yang digunakan:</strong>
+<strong>Dependency yang digunakan</strong>
 1. docker version 19.03.6, build 369ce74a3c
 2. docker-compose version 1.17.1, build unknown
 3. Nginx sebagai web server
@@ -14,7 +14,7 @@ Bertujuan membuat blog berbasis Docker Containerization.
 1. Yii2 Admin, By Cak Munir
 2. Yii2 Mimin, By Om Hafid
 
-Cara menggunakan:
+<strong>Cara menggunakan</strong>
 
 1. Sesuaikan setting environment di .env
 2. Jalankan <code>composer update -vvv</code> di folder <code>yii2</code>
