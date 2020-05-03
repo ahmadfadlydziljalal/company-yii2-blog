@@ -5,6 +5,7 @@
 
 use app\assets\AppAssetBs4;
 use app\widgets\Alert;
+use rmrevin\yii\fontawesome\FAS;
 use yii\bootstrap4\Html;
 use yii\helpers\Url;
 
@@ -60,6 +61,14 @@ AppAssetBs4::register($this);
                     </a>
                 <?php else: ?>
                     <?php
+                    echo Html::a('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M9 5H8V4h1v1zm4 3h-1v1h1V8zM6 5H5v1h1V5zM5 8H4v1h1V8zm11-5.5l-.5-.5L9 7c-.06-.02-1 0-1 0-.55 0-1 .45-1 1v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-.92l6-5.58zm-1.59 4.09c.19.61.3 1.25.3 1.91 0 3.42-2.78 6.2-6.2 6.2-3.42 0-6.21-2.78-6.21-6.2 0-3.42 2.78-6.2 6.2-6.2 1.2 0 2.31.34 3.27.94l.94-.94A7.459 7.459 0 008.51 1C4.36 1 1 4.36 1 8.5 1 12.64 4.36 16 8.5 16c4.14 0 7.5-3.36 7.5-7.5 0-1.03-.2-2.02-.59-2.91l-1 1z"></path></svg>', ['/site/dashboard'], [
+                        'class' => 'btn btn-sm btn-outline-secondary',
+                        'style' => [
+                            'margin-right' => '5px',
+                        ]
+                    ])
+                    ?>
+                    <?php
                     echo Html::beginForm(['/site/logout'], 'post');
                     echo Html::submitButton('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 17" width="16" height="17"><path fill-rule="evenodd" d="M12 9V7H8V5h4V3l4 3-4 3zm-2 3H6V3L2 1h8v3h1V1c0-.55-.45-1-1-1H1C.45 0 0 .45 0 1v11.38c0 .39.22.73.55.91L6 16.01V13h4c.55 0 1-.45 1-1V8h-1v4z"></path></svg> Sign Out', [
                             'class' => 'btn btn-sm btn-outline-secondary text-danger'
@@ -75,13 +84,18 @@ AppAssetBs4::register($this);
         <!--        <nav class="nav d-flex justify-content-between">-->
         <nav class="nav d-flex">
             <a class="p-2 text-muted" href="<?php echo Url::to(['site/index']) ?>">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M16 9l-3-3V2h-2v2L8 1 0 9h2l1 5c0 .55.45 1 1 1h8c.55 0 1-.45 1-1l1-5h2zm-4 5H9v-4H7v4H4L2.81 7.69 8 2.5l5.19 5.19L12 14z"></path></svg>
+                <?= FAS::icon(FAS::_HOME) ?>
                 Home
 
             </a>
             <a class="p-2 text-muted" href="<?php echo Url::to(['site/contact']) ?>">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 16" width="10" height="16"><path fill-rule="evenodd" d="M9 0H1C.27 0 0 .27 0 1v15l5-3.09L10 16V1c0-.73-.27-1-1-1zm-.78 4.25L6.36 5.61l.72 2.16c.06.22-.02.28-.2.17L5 6.6 3.12 7.94c-.19.11-.25.05-.2-.17l.72-2.16-1.86-1.36c-.17-.16-.14-.23.09-.23l2.3-.03.7-2.16h.25l.7 2.16 2.3.03c.23 0 .27.08.09.23h.01z"></path></svg>
+                <?= FAS::icon(FAS::_ENVELOPE) ?>
                 Contact
+            </a>
+
+            <a class="p-2 text-muted" href="<?php echo Url::to(['site/about']) ?>">
+                <?= FAS::icon(FAS::_ADDRESS_BOOK) ?>
+                About
             </a>
 
             <!--            <a class="p-2 text-muted" href="--><?php //echo Url::to(['site/about']) ?><!--">About</a>-->

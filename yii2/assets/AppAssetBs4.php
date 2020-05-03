@@ -30,5 +30,6 @@ class AppAssetBs4 extends AssetBundle
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap4\BootstrapAsset',
+        'rmrevin\yii\fontawesome\CdnFreeAssetBundle'
     ];
 }

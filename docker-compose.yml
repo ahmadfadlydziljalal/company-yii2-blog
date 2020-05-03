@@ -71,6 +71,7 @@ services:
             - .env
         volumes:
             - "./yii2/:/var/www/html"
+            - "./README.md:/var/www/html/README.md"
         networks:
             - company-network
         depends_on:

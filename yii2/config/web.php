@@ -1,5 +1,8 @@
 <?php
 
+use yii\bootstrap4\LinkPager as Bootstrap4LinkPager;
+use yii\widgets\LinkPager;
+
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
@@ -10,20 +13,73 @@ $config = [
     'bootstrap' => ['log'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
+        '@npm' => '@vendor/npm-asset',
     ],
-    
+    'container' => [
+        'definitions' => [
+            LinkPager::class => Bootstrap4LinkPager::class,
+            'yii\data\Pagination' => [
+                'pageSize' => 10
+            ]
+        ]
+    ],
     'language' => 'en',
     'modules' => [
         'admin' => [
             'class' => 'mdm\admin\Module',
-            //'layout' => 'left-menu', // it can be '@path/to/your/layout'.
+            'layout' => '@app/modules/superadmin/views/layouts/main',
+            // 'layout' => 'top-menu',
+            'defaultRoute' => '/admin/default',
+            'viewPath' => '@app/modules/superadmin/views/mdm',
+            'params' => [
+                'description' => 'Auth manager for Yii2 (RBAC Manager). Dokumentasi bisa dilihat di <a href="https://github.com/mdmsoft/yii2-admin"> Doc </a>'
+            ]
+        ],
+
+        'gridview' => [
+            'class' => '\kartik\grid\Module'
         ],
         'mimin' => [
             'class' => '\hscstudio\mimin\Module',
+            'layout' => '@app/modules/superadmin/views/layouts/main',
+            'controllerMap' => [
+                'user' => 'app\modules\superadmin\controllers\UserController',
+                'route' => 'app\modules\superadmin\controllers\RouteController',
+                'role' => 'app\modules\superadmin\controllers\RoleController'
+            ],
+            'viewPath' => '@app/modules/superadmin/views/mimin',
+            'defaultRoute' => '/mimin/route',
+            'params' => [
+                'description' => 'Simple RBAC Manager for Yii2 (minify of yii2-admin). Dokumentasi bisa dilihat di <a href="https://github.com/hscstudio/yii2-mimin"> Doc </a> '
+            ]
+        ],
+        'redactor' => 'yii\redactor\RedactorModule',
+        'superadmin' => [
+            'class' => 'app\modules\superadmin\Module',
+            'layout' => '@app/modules/superadmin/views/layouts/main',
+            'defaultRoute' => '/superadmin/default',
+            'aliases' => [
+                'homeUrl' => '/superadmin/default'
+            ],
+            'params' => [
+                'description' => 'Just a dumb web developer.<br> Kontak Saya di: <a href="https://github.com/ahmadfadlydziljalal">My Github</a>'
+            ]
         ],
     ],
     'components' => [
+        'assetManager' => [
+            'bundles' => [
+                'kartik\form\ActiveFormAsset' => [
+                    'bsDependencyEnabled' => false // do not load bootstrap assets for a specific asset bundle
+                ],
+            ],
+        ],
+        'view' => [
+            'theme' => [
+                'pathMap' => ['@app/views' => '@app/themes/AdminLTE'],
+                'baseUrl' => '@web/../themes/AdminLTE',
+            ],
+        ],
         'db' => $db,
         'authManager' => [
             'class' => 'yii\rbac\DbManager', // only support DbManager
@@ -70,6 +126,7 @@ $config = [
                 'about' => 'site/about',
                 'contact' => 'site/contact',
                 'login' => 'site/login',
+                'Available Module' => 'site/dashboard',
             ],
         ],
     ],
@@ -94,6 +151,7 @@ if (YII_ENV_DEV) {
         'class' => 'yii\debug\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
         // 'allowedIPs' => ['127.0.0.1', '::1'],
+        'allowedIPs' => ['*'],
     ];
 
     $config['bootstrap'][] = 'gii';
