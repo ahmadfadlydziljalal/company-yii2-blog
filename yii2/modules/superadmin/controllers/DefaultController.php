@@ -20,7 +20,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * Action index
+     * Action Read Me
      */
     public function actionReadMe($page = 'README.md')
     {

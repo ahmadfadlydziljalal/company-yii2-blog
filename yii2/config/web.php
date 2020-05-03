@@ -126,7 +126,7 @@ $config = [
                 'about' => 'site/about',
                 'contact' => 'site/contact',
                 'login' => 'site/login',
-                'Available Module' => 'site/dashboard',
+                'dashboard' => 'site/dashboard',
             ],
         ],
     ],

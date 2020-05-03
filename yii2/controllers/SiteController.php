@@ -18,10 +18,10 @@ class SiteController extends Controller {
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout'],
+                'only' => ['logout', 'dashboard'],
                 'rules' => [
                     [
-                        'actions' => ['logout'],
+                        'actions' => ['logout', 'dashboard'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
