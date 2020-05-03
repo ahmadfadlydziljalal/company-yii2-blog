@@ -39,3 +39,7 @@ phpunit.phar
 
 # yii2 web folder
 /yii2/web/assets
+
+# yii2 themes
+/yii2/themes/
+/yii2/themes/AdminLTE/
