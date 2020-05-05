@@ -67,7 +67,7 @@ services:
         container_name: php-yii2
         tty: true
         working_dir: /var/www/html
-        env_file: 
+        env_file:
             - .env
         volumes:
             - "./yii2/:/var/www/html"

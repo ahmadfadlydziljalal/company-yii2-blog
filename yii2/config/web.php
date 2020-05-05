@@ -28,7 +28,6 @@ $config = [
         'admin' => [
             'class' => 'mdm\admin\Module',
             'layout' => '@app/modules/superadmin/views/layouts/main',
-            // 'layout' => 'top-menu',
             'defaultRoute' => '/admin/default',
             'viewPath' => '@app/modules/superadmin/views/mdm',
             'params' => [
@@ -58,9 +57,6 @@ $config = [
             'class' => 'app\modules\superadmin\Module',
             'layout' => '@app/modules/superadmin/views/layouts/main',
             'defaultRoute' => '/superadmin/default',
-            'aliases' => [
-                'homeUrl' => '/superadmin/default'
-            ],
             'params' => [
                 'description' => 'Just a dumb web developer.<br> Kontak Saya di: <a href="https://github.com/ahmadfadlydziljalal">My Github</a>'
             ]
@@ -87,6 +83,7 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'VnRxKwxSJaaMdpXDHLg4cALqhit6ojof',
+
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -119,6 +116,7 @@ $config = [
             ],
         ],
         'urlManager' => [
+            'scriptUrl'=>'/index.php',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
@@ -139,6 +137,7 @@ $config = [
             // 'admin/*',
             // 'mimin/*', // only in dev mode
             'site/*',
+            'api/*'
         ],
     ],
     'params' => $params,
