@@ -24,17 +24,19 @@ class AuthController extends Controller {
 
     public function actionLogin() {
         // Tangkap data login dari client (username & password)
-        $username = !empty($_POST['username']) ? $_POST['username'] : '';
-        $password = !empty($_POST['password']) ? $_POST['password'] : '';
-        $response = [];
+
+        $username = Yii::$app->request->post('username');
+        $password = Yii::$app->request->post('password');
 
         // validasi jika kosong
         if (empty($username) || empty($password)) {
+
+            Yii::$app->response->setStatusCode(400);
             $response = [
-                'response' => 400,
                 'status' => 'error',
                 'message' => 'username & password tidak boleh kosong!',
             ];
+
         } else {
             // cari di database, ada nggak username dimaksud
             $user = User::findByUsername($username);
@@ -44,8 +46,9 @@ class AuthController extends Controller {
 
                 // check, valid nggak passwordnya, jika valid maka bikin response success
                 if ($user->validatePassword($password)) {
+
+                    Yii::$app->response->setStatusCode(200);
                     $response = [
-                        'response' => 200,
                         'status' => 'success',
                         'data-authentication' => [
                             'id' => $user->id,
@@ -57,16 +60,18 @@ class AuthController extends Controller {
 
                 } // Jika password salah maka bikin response seperti ini
                 else {
+
+                    Yii::$app->response->setStatusCode(400);
                     $response = [
-                        'response' => 400,
                         'status' => 'error',
                         'message' => 'Wrong Password',
                     ];
                 }
             } // Jika username tidak ditemukan bikin response kek gini
             else {
+
+                Yii::$app->response->setStatusCode(400);
                 $response = [
-                    'response' => 400,
                     'status' => 'error',
                     'message' => 'The username is not found',
                 ];

@@ -67,6 +67,10 @@ $config = [
         ],
     ],
     'components' => [
+        'jwt' => [
+            'class' => \bizley\jwt\Jwt::class,
+            'key' => getenv('JWT_KEY') // Secret key string or path to the public key file
+        ],
         'assetManager' => [
             'bundles' => [
                 'kartik\form\ActiveFormAsset' => [
