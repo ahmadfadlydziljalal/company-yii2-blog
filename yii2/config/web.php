@@ -25,13 +25,17 @@ $config = [
     ],
     'language' => 'en',
     'modules' => [
+        'api' => [
+            'class' => 'app\modules\api\Module',
+        ],
         'admin' => [
             'class' => 'mdm\admin\Module',
             'layout' => '@app/modules/superadmin/views/layouts/main',
             'defaultRoute' => '/admin/default',
             'viewPath' => '@app/modules/superadmin/views/mdm',
             'params' => [
-                'description' => 'Auth manager for Yii2 (RBAC Manager). Dokumentasi bisa dilihat di <a href="https://github.com/mdmsoft/yii2-admin"> Doc </a>'
+                'description' => 'Auth manager for Yii2 (RBAC Manager). 
+                                   Dokumentasi bisa dilihat di <a href="https://github.com/mdmsoft/yii2-admin"> Doc </a>'
             ]
         ],
 
@@ -80,11 +84,7 @@ $config = [
         'authManager' => [
             'class' => 'yii\rbac\DbManager', // only support DbManager
         ],
-        'request' => [
-            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => 'VnRxKwxSJaaMdpXDHLg4cALqhit6ojof',
 
-        ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
@@ -115,8 +115,14 @@ $config = [
                 ],
             ],
         ],
+        'request' => [
+            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
+            'cookieValidationKey' => 'VnRxKwxSJaaMdpXDHLg4cALqhit6ojof',
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ]
+        ],
         'urlManager' => [
-            'scriptUrl'=>'/index.php',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
@@ -125,6 +131,24 @@ $config = [
                 'contact' => 'site/contact',
                 'login' => 'site/login',
                 'dashboard' => 'site/dashboard',
+
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => [
+                        'v1/users' => 'api/v1/user'
+                    ],
+                ],
+
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => [
+                        'v1/auth' => 'api/v1/auth'
+                    ],
+                    'patterns' => [
+                        'POST' => 'login',
+                    ],
+                    'pluralize' => false,
+                ],
             ],
         ],
     ],
