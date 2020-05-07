@@ -24,7 +24,8 @@
         "rmrevin/yii2-fontawesome": "^3.4",
         "kartik-v/yii2-grid": "dev-master",
         "johnitvn/yii2-ajaxcrud": "*",
-        "yiidoc/yii2-redactor": "*"
+        "yiidoc/yii2-redactor": "*",
+        "firebase/php-jwt": "^5.2"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
