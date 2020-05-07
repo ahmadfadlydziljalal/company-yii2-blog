@@ -9,6 +9,7 @@
 namespace app\modules\api\v1\controllers;
 
 
+use app\models\User;
 use Yii;
 use yii\rest\Controller;
 
@@ -30,12 +31,13 @@ class AuthController extends Controller {
         // validasi jika kosong
         if (empty($username) || empty($password)) {
             $response = [
+                'response' => 400,
                 'status' => 'error',
                 'message' => 'username & password tidak boleh kosong!',
             ];
         } else {
             // cari di database, ada nggak username dimaksud
-            $user = \app\models\User::findByUsername($username);
+            $user = User::findByUsername($username);
 
             // jika username ada maka
             if (!empty($user)) {
@@ -43,6 +45,7 @@ class AuthController extends Controller {
                 // check, valid nggak passwordnya, jika valid maka bikin response success
                 if ($user->validatePassword($password)) {
                     $response = [
+                        'response' => 200,
                         'status' => 'success',
                         'data-authentication' => [
                             'id' => $user->id,
@@ -55,6 +58,7 @@ class AuthController extends Controller {
                 } // Jika password salah maka bikin response seperti ini
                 else {
                     $response = [
+                        'response' => 400,
                         'status' => 'error',
                         'message' => 'Wrong Password',
                     ];
@@ -62,6 +66,7 @@ class AuthController extends Controller {
             } // Jika username tidak ditemukan bikin response kek gini
             else {
                 $response = [
+                    'response' => 400,
                     'status' => 'error',
                     'message' => 'The username is not found',
                 ];
