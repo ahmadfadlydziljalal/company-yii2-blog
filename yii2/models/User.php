@@ -16,6 +16,7 @@ namespace app\models;
  * @property int $created_at
  * @property int $updated_at
  * @property string generate_password
+ * @property string token
  *
  */
 
@@ -67,7 +68,7 @@ class User extends ActiveRecord implements IdentityInterface {
             [['username', 'email'], 'unique'],
             [['email'], 'email'],
             ['status', 'integer'],
-            ['generate_password', 'safe'],
+            [['generate_password', 'auth_key', 'token'], 'safe'],
             [['old_password', 'new_password', 'repeat_password'], 'string', 'min' => 6],
             [['repeat_password'], 'compare', 'compareAttribute' => 'new_password'],
 
@@ -102,6 +103,7 @@ class User extends ActiveRecord implements IdentityInterface {
             'status' => 'Status',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
+            'token' => 'Token',
         ];
     }
 
@@ -115,9 +117,10 @@ class User extends ActiveRecord implements IdentityInterface {
 
     /**
      * {@inheritdoc}
+     * @param \Lcobucci\JWT\Token $token
      */
     public static function findIdentityByAccessToken($token, $type = null) {
-        return static::findOne(['auth_key' => $token, 'status' => self::STATUS_ACTIVE]);
+        return static::findOne(['token' => $token, 'status' => self::STATUS_ACTIVE]);
     }
 
     /**
@@ -138,10 +141,16 @@ class User extends ActiveRecord implements IdentityInterface {
     }
 
     /**
+     * @return string
+     */
+    public function getToken() {
+        return $this->token;
+    }
+
+    /**
      * {@inheritdoc}
      */
-    public function getAuthKey()
-    {
+    public function getAuthKey() {
         return $this->authKey;
     }
 
