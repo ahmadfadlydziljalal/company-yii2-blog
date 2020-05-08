@@ -89,13 +89,11 @@ class AuthController extends Controller {
                 if ($user->validatePassword($password)) {
 
                     Yii::$app->response->setStatusCode(200);
-                    $jwt = $this->generateJWT(
-                        [
-                            'id' => $user->id,
-                            'username' => $user->username,
+                    $jwt = $this->generateJWT([
+                        'id' => $user->id,
+                        'username' => $user->username,
 
-                        ],
-                        [
+                    ], [
                             'role' => array_keys(Yii::$app->authManager->getRolesByUser($user->id)),
                             'route' => array_keys(Yii::$app->authManager->getPermissionsByUser($user->id))
                         ]

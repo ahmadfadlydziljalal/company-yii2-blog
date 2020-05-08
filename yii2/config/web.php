@@ -150,6 +150,7 @@ $config = [
                     ],
                     'patterns' => [
                         'POST' => 'login',
+                        'GET' => 'token',
                     ],
                     'pluralize' => false,
                 ],
