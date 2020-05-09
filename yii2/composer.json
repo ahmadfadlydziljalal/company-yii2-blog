@@ -26,7 +26,8 @@
         "johnitvn/yii2-ajaxcrud": "*",
         "yiidoc/yii2-redactor": "*",
         "firebase/php-jwt": "^5.2",
-        "bizley/jwt": "^2.0"
+        "bizley/jwt": "^2.0",
+        "tuyakhov/yii2-json-api": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
