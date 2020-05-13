@@ -1,6 +1,5 @@
 {
     "require": {
-        "yiisoft/yii2-bootstrap4": "^2.0",
-        "tuyakhov/yii2-json-api": "*"
+        "yiisoft/yii2-bootstrap4": "^2.0"
     }
 }
