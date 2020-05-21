@@ -29,7 +29,31 @@ class AuthController extends Controller {
     }
 
     public function behaviors() {
+
         $behaviors = parent::behaviors();
+        // remove authentication filter
+        unset($behaviors['authenticator']);
+
+        // add CORS filter
+        $behaviors['corsFilter'] = [
+            'class' => \yii\filters\Cors::className(),
+            'cors' => [
+                // restrict access to
+                'Origin' => ['http://localhost:3000', 'http://0.0.0.0:3000'],
+                // Allow only POST and PUT methods
+                'Access-Control-Request-Method' => ['POST', 'PUT'],
+                // Allow only headers 'X-Wsse'
+                'Access-Control-Request-Headers' => ['X-Wsse'],
+                // Allow credentials (cookies, authorization headers, etc.) to be exposed to the browser
+                'Access-Control-Allow-Credentials' => true,
+                // Allow OPTIONS caching
+                'Access-Control-Max-Age' => 3600,
+                // Allow the X-Pagination-Current-Page header to be exposed to the browser.
+                'Access-Control-Expose-Headers' => ['X-Pagination-Current-Page'],
+            ],
+        ];
+
+        // re-add authentication filter
         $behaviors['authenticator'] = [
             'class' => JwtHttpBearerAuth::class,
             'optional' => [

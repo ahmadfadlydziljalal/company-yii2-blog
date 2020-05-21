@@ -8,9 +8,9 @@ $this->title = getenv("APP_NAME");
 
     <div class="jumbotron p-3 p-md-5 text-black rounded bg-light">
         <div class="col-md-6 px-0">
-            <h1 class="display-4 font-weight-bold">
-                Raya Maudy Azzahra
-            </h1>
+            <h4 class="display-4 font-weight-bold">
+                Welcome To Backend
+            </h4>
             <p class="lead my-3">
                 <?php echo Yii::powered() ?>
                 Versi: <?php echo Yii::getVersion() ?>
