@@ -1,4 +1,5 @@
-.git/*
+**/.vscode/
+**/.git/
 
 # yii2 tests folder
 /yii2/tests/_output/*
