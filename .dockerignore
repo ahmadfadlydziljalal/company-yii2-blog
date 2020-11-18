@@ -9,5 +9,5 @@ yii2/vagrant
 yii2/web/assets
 yii2/.idea/
 
-.idea/
-.vscode/
+/.idea/
+/.vscode/
