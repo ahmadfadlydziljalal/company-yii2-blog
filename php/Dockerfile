@@ -40,7 +40,7 @@ COPY --chown=www-data:www-data README.md /var/www/html/
 # Change current user to www
 USER www-data
 
-# Expose port 9001 and start php-fpm server
+# Expose port 9000 and start php-fpm server
 EXPOSE 9000
 CMD ["php-fpm"]
 

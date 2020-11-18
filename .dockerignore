@@ -5,7 +5,9 @@
 /yii2/tests/_support/_generated
 
 # yii2 vagrant folder
-/yii2/vagrant
+yii2/vagrant
+yii2/web/assets
+yii2/.idea/
 
-# yii2 web folder
-/yii2/web/assets
+.idea/
+.vscode/

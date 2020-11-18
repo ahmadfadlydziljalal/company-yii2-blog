@@ -32,3 +32,14 @@ by <a href="https://github.com/hscstudio/yii2-mimin">Yii2 Mimin By Hafid Mukhlas
 maka lakukan migrasi <code>yii migrate --migrationPath=@hscstudio/mimin/migrations</code>
  
 
+Akses ke adminer:
+
+Melalui browser internet : akses ke IP local anda e.g: <code>http://10.60.36.60:8080</code>. Kemudian masukkkan input data berikut.
+        
+<code>
+    System: MySQL; 
+    Server: 10.60.36.60:6033; 
+    Username:root; 
+    Password:root; 
+    Database:db
+</code>
